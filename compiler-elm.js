@@ -46,7 +46,7 @@ function compileElm (elmMainFile, elmOutputDir) {
     var outputDirectory = currentDir + "/" + elmOutputDir;
     var mainFilePath = currentDir + "/" + elmMainFile;
     var mainFileDir = path.dirname(mainFilePath);
-    var outputFile = outputDirectory + "/" + path.basename(elmMainFile, ".elm") + ".js"
+    var outputFile = outputDirectory + "/" + path.basename(elmMainFile, ".elm") + "-elm.js"
     var elmMakeFilesDir = mainFileDir + "/" + ELM_DIR;
     var tmpElmFilePath = elmMakeFilesDir + "/" + COMPILER_ELM_TMP_COMPILE_FILENAME;
     var args = '"' + ["elm-make", mainFilePath, "--output", tmpElmFilePath].join('" "') + '"';
