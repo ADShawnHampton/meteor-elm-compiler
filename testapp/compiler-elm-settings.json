@@ -1,0 +1,4 @@
+{
+    "outputDirectory" : "client/elm",
+    "elmMainFiles" : ["elm/elm-todomvc/Todo.elm"]
+}

@@ -4,7 +4,7 @@ Package.describe({
   // Brief, one-line summary of the package.
   summary: 'Automatically compiles elm code and redeploys meteor on save',
   // URL to the Git repository containing the source code for this package.
-  git: '',
+  git: 'https://github.com/thatguyhampton/compiler-elm.git',
   // By default, Meteor will default to using README.md for documentation.
   // To avoid submitting documentation, set this field to null.
   documentation: 'README.md'
@@ -14,13 +14,13 @@ Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
   api.use('ecmascript');
   api.use('isobuild:compiler-plugin@1.0.0');
-  // api.addFiles('compiler-elm.js');
+  api.export('ElmCompiler');
 });
 
 Package.onTest(function(api) {
   api.use('ecmascript');
-  api.use('tinytest');
   api.use('thatguyhampton:compiler-elm');
+  api.use('tinytest');
   api.addFiles('compiler-elm-tests.js');
 });
 
