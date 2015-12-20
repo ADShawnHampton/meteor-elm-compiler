@@ -4,7 +4,9 @@ This is a meteor package created for compiling elm code to javascript on .elm fi
 
 ##Setup
 
-Using this package correctly requires you to add a file named `compiler-elm-settings.json` to the top level directory of your meteor project. To this file you must add two properties : 
+<!-- Add the package to your meteor project like this `meteor add thatguyhampton:compiler-elm` -->
+
+Using this package correctly requires you to add a file named `meteor-elm-compiler-settings.json` to the top level directory of your meteor project. To this file you must add two properties : 
 
 ```
 {
