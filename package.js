@@ -10,6 +10,10 @@ Package.describe({
   documentation: 'README.md'
 });
 
+Npm.depends({
+  "node-elm-compiler" : "3.0.0"
+});
+
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
   api.use('ecmascript');
@@ -31,6 +35,6 @@ Package.registerBuildPlugin({
     'meteor-elm-compiler.js'
   ],
   npmDependencies: {
-
+    "node-elm-compiler" : "3.0.0"
   }
 });
