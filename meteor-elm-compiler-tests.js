@@ -1,6 +1,7 @@
 // Write your tests here!
 
-var testOutputDirectory = "testOutput/elm";
+var testOutputMainDirectory = "testOutput";
+var testOutputDirectory = testOutputMainDirectory + "/elm";
 var testMainFile = "testapp/elm/elm-todomvc/Todo.elm";
 
 var fs = Npm.require('fs');
@@ -24,6 +25,7 @@ Tinytest.add("Test ElmCompiler.processFilesForTarget", function (test){
 });
 
 Tinytest.addAsync("Test ElmCompiler.compileElm", function (test, next){
+    var finalTestOutputMainDirectory = ElmCompiler.outputDirectory(testOutputMainDirectory);
     var finalTestOutputDirectory = ElmCompiler.outputDirectory(testOutputDirectory);
     var finalTestOutputFile = ElmCompiler.outputFileNameForElm(testMainFile, testOutputDirectory);
     test.isNotNull(ElmCompiler.compileElm);
@@ -44,7 +46,7 @@ Tinytest.addAsync("Test ElmCompiler.compileElm", function (test, next){
                     test.fail(finalTestOutputFile + " is not a file");
                 }
                 
-                rimraf(finalTestOutputDirectory, Meteor.bindEnvironment(function(err) {
+                rimraf(finalTestOutputMainDirectory, Meteor.bindEnvironment(function(err) {
                     if (err) {
                         test.fail("Failed to remove directory " + finalTestOutputDirectory);
                     }
