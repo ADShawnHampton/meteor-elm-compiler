@@ -11,7 +11,8 @@ Package.describe({
 });
 
 Npm.depends({
-  "node-elm-compiler" : "3.0.0"
+  "node-elm-compiler" : "3.0.0",
+  "mkdirp" : "0.5.1"
 });
 
 Package.onUse(function(api) {
@@ -35,6 +36,7 @@ Package.registerBuildPlugin({
     'meteor-elm-compiler.js'
   ],
   npmDependencies: {
-    "node-elm-compiler" : "3.0.0"
+    "node-elm-compiler" : "3.0.0",
+    "mkdirp" : "0.5.1"
   }
 });

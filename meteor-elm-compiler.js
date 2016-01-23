@@ -5,12 +5,11 @@ var path = Npm.require('path');
 var child_process = Npm.require('child_process');
 var Fiber = Npm.require('fibers');
 var NodeElmCompiler = Npm.require('node-elm-compiler');
+var mkdirp = Npm.require('mkdirp');
 
 // Necessary setup file for this package to run correctly. This needs to be in projects main directory
 var ELM_COMPILER_SETTINGS_JSON_FILE = "meteor-elm-compiler-settings.json";
 var ELM_DIR = ".elm";
-
-// TODO use node elm compiler
 
 ElmCompiler = {
 
@@ -54,7 +53,8 @@ ElmCompiler = {
         var tmpThis = this;
         NodeElmCompiler.compileToString([mainFilePath], {cwd: elmMakeFilesDir}).then(function(data){
             var finalJsData = "(function (global, undefined) {\n" + data + "if (!(\"Elm\" in global)) {\n    global.Elm = Elm;\n}\n}) (this);";
-            tmpThis.makeDirIfNotExists(outputDirectory);
+            console.log("output directory : " + outputDirectory);
+            mkdirp(outputDirectory);
             fs.writeFileSync(outputFile, finalJsData);
         }, function(err){
             console.log(err);
@@ -62,11 +62,11 @@ ElmCompiler = {
     },
 
     makeDirIfNotExists : function (dirPath) {
-        try {
+        // try {
             fs.mkdirSync(dirPath);
-        } catch (e) {
-            if (e.code != "EEXIST") throw e;
-        }
+        // } catch (e) {
+        //     if (e.code != "EEXIST") throw e;
+        // }
     },
 
     deleteFileIfExists : function (filePath) {

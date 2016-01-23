@@ -1,5 +1,13 @@
 {
   "dependencies": {
+    "mkdirp": {
+      "version": "0.5.1",
+      "dependencies": {
+        "minimist": {
+          "version": "0.0.8"
+        }
+      }
+    },
     "node-elm-compiler": {
       "version": "3.0.0",
       "dependencies": {
