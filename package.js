@@ -12,7 +12,10 @@ Package.describe({
 
 Npm.depends({
     "node-elm-compiler" : "3.0.0",
-    "mkdirp" : "0.5.1"
+    "mkdirp" : "0.5.1",
+    "es5-shim" : "4.4.1",
+    "es6-shim" : "0.34.2",
+    "rimraf" : "2.5.1"
 });
 
 Package.onUse(function(api) {
@@ -46,6 +49,8 @@ Package.registerBuildPlugin({
     ],
     npmDependencies: {
         "node-elm-compiler" : "3.0.0",
-        "mkdirp" : "0.5.1"
+        "mkdirp" : "0.5.1",
+        "es5-shim" : "4.4.1",
+        "es6-shim" : "0.34.2"
     }
 });

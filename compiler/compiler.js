@@ -4,6 +4,8 @@ var child_process = Npm.require('child_process');
 var Fiber = Npm.require('fibers');
 var NodeElmCompiler = Npm.require('node-elm-compiler');
 var mkdirp = Npm.require('mkdirp');
+Npm.require('es5-shim');
+Npm.require('es6-shim');
 
 ElmCompiler = {
 
@@ -41,21 +43,28 @@ ElmCompiler = {
     // elmOutput : ouput location for compiled javascript
     compileElm : function (elmMainFile, elmOutputDir) {
         var currentDir = process.env.PWD;
-        var outputDirectory = currentDir + "/" + elmOutputDir;
+        var outputDirectory = ElmCompiler.outputDirectory(elmOutputDir);
         var mainFilePath = currentDir + "/" + elmMainFile;
         var mainFileDir = path.dirname(mainFilePath);
-        var outputFile = outputDirectory + "/" + path.basename(elmMainFile, ".elm") + "-elm.js"
+        var outputFile = ElmCompiler.outputFileNameForElm(elmMainFile, elmOutputDir);
         var elmMakeFilesDir = mainFileDir + "/" + ElmCompiler.ELM_DIR;
         
         var tmpThis = this;
-        NodeElmCompiler.compileToString([mainFilePath], {cwd: elmMakeFilesDir}).then(function(data){
+        return NodeElmCompiler.compileToString([mainFilePath], {cwd: elmMakeFilesDir}).then(Meteor.bindEnvironment(function(data){
             var finalJsData = "(function (global, undefined) {\n" + data + "if (!(\"Elm\" in global)) {\n    global.Elm = Elm;\n}\n}) (this);";
-            console.log("output directory : " + outputDirectory);
-            mkdirp(outputDirectory);
+            mkdirp.sync(outputDirectory);
             fs.writeFileSync(outputFile, finalJsData);
-        }, function(err){
+        }), Meteor.bindEnvironment(function(err){
             console.log(err);
-        });
-    }
+        }));
+    },
+
+    outputDirectory : function(elmOutputDir) {
+        return process.env.PWD + "/" + elmOutputDir;
+    },
+
+    outputFileNameForElm : function (elmMainFile, elmOutputDir) {
+        return ElmCompiler.outputDirectory(elmOutputDir) + "/" + path.basename(elmMainFile, ".elm") + "-elm.js";
+    } 
 
 };

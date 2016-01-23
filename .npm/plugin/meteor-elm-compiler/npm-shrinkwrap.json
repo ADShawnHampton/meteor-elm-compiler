@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "es5-shim": {
+      "version": "4.4.1"
+    },
+    "es6-shim": {
+      "version": "0.34.2"
+    },
     "mkdirp": {
       "version": "0.5.1",
       "dependencies": {
