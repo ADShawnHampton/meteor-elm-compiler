@@ -57,3 +57,17 @@ Tinytest.addAsync("Test ElmCompiler.compileElm", function (test, next){
         next();
     }));
 });
+
+Tinytest.add("Test ElmCompiler.outputDirectory", function (test){
+    test.isNotNull(ElmCompiler.outputDirectory);
+    var expectedPath = process.env.PWD + "/" + testOutputDirectory;
+    var retPath = ElmCompiler.outputDirectory(testOutputDirectory);
+    test.equal(retPath, expectedPath, "Returned path did not match expected path");
+});
+
+Tinytest.add("Test ElmCompiler.outputFileNameForElm", function(test) {
+    test.isNotNull(ElmCompiler.outputFileNameForElm);
+    var expectedPath = ElmCompiler.outputDirectory(testOutputDirectory) + "/Todo-elm.js";
+    var retPath = ElmCompiler.outputFileNameForElm(testMainFile, testOutputDirectory);
+    test.equal(retPath, expectedPath, "Returned path did not match expected path");
+});

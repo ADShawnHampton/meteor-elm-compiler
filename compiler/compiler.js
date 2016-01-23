@@ -59,10 +59,12 @@ ElmCompiler = {
         }));
     },
 
+    // generate output directory path
     outputDirectory : function(elmOutputDir) {
         return process.env.PWD + "/" + elmOutputDir;
     },
 
+    // generate output file path
     outputFileNameForElm : function (elmMainFile, elmOutputDir) {
         return ElmCompiler.outputDirectory(elmOutputDir) + "/" + path.basename(elmMainFile, ".elm") + "-elm.js";
     } 
